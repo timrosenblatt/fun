@@ -98,3 +98,9 @@ puts dec.inspect
 expect(original, dec)
 
 puts "win!"
+
+# Another possibly simpler-to-implement version would be converting
+# each character to an array of CSV bytes and then just use an ASCII
+# character as the separator. That means that I can just use String#bytes
+# to implement, and it doesn't require a lookahead implmenetation, just
+# decoding back to UTF8
