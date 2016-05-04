@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby -w
 
-puts "make a max heap that works in an array\n\n"
+# puts "make a max heap that works in an array\n\n"
 
 class MaxHeap
 
@@ -84,7 +84,6 @@ class MaxHeap
     end
   end
 
-  # Always happens at head
   def delete
     deleted_value = @heap[0]
     # Step 1 − Remove root node.
@@ -95,29 +94,31 @@ class MaxHeap
 
     @heap[0] = tail_value
 
+    # render_tree
+
     parent_index = 0
 
     while(child_exists?(parent_index)) do
       # puts "looping at parent index #{parent_index}"
-      if left_child_exists?(parent_index) && left_child_needs_to_be_swapped?(parent_index)
-        # puts 'swapping to left'
-        swap(parent_index, left_child_index(parent_index))
-        next_parent_index = left_child_index(parent_index)
-      elsif right_child_exists?(parent_index) && right_child_needs_to_be_swapped?(parent_index)
-        # puts 'swapping to right'
-        swap(parent_index, right_child_index(parent_index))
-        next_parent_index = right_child_index(parent_index)
-      else
+      if !swap_needed?(parent_index)
         break
+      else
+        if right_child_exists?(parent_index) && right_child_value(parent_index) > left_child_value(parent_index)
+          # puts 'swapping to right'
+          # puts "swapping #{value(parent_index)}, #{right_child_value(parent_index)}"
+          swap(parent_index, right_child_index(parent_index))
+          next_parent_index = right_child_index(parent_index)
+        else
+          # puts 'swapping to left'
+          # puts "swapping #{value(parent_index)}, #{left_child_value(parent_index)}"
+          swap(parent_index, left_child_index(parent_index))
+          next_parent_index = left_child_index(parent_index)
+        end
       end
 
-      break unless child_exists?(next_parent_index)
+      # break unless child_exists?(next_parent_index)
       parent_index = next_parent_index
     end
-
-    # Step 3 − Compare the value of this child node with its parent.
-    # Step 4 − If value of parent is less than child, then swap them.
-    # Step 5 − Repeat step 3 & 4 until Heap property holds.
 
     deleted_value
   end
@@ -126,6 +127,11 @@ class MaxHeap
 
   def exists?(index)
     !@heap[index].nil?
+  end
+
+  def swap_needed?(parent_index)
+    ( left_child_exists?(parent_index) && left_child_needs_to_be_swapped?(parent_index) ) ||
+      ( right_child_exists?(parent_index) && right_child_needs_to_be_swapped?(parent_index) )
   end
 
   def left_child_needs_to_be_swapped?(parent_index)
@@ -209,32 +215,36 @@ mh = MaxHeap.new
   # puts "after add, mh is #{mh}\n\n"
 end
 
-# Looks like the rebalancing isn't working on delete, but the whole thing runs.
-
-
+# puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
+# puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
+# puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
+# puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
+# puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
+# puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
+# puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
+# puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
+# puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
+# puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
+# puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
+# puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
 puts mh.delete
-puts mh.render_tree
+puts mh.delete
+puts mh.delete
+puts mh.delete
+puts mh.delete
+puts mh.delete
+puts mh.delete
+puts mh.delete
+puts mh.delete
