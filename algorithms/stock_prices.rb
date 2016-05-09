@@ -35,21 +35,38 @@ stock_prices_yesterday = [10, 7, 5, 8, 11, 9]
 def brute_force(stock_prices)
   best_buy_time = nil
   best_sell_time = nil
+  best_price = 0
 
-  buy_time = 0
-  sell_time = 1
   length = stock_prices.length
 
-  
+  length.times do |buy_time|
+    (buy_time+1..length-1).each do |sell_time|
+      current_price = price_at(prices: stock_prices,
+                               buy_time: buy_time,
+                               sell_time: sell_time)
 
+      # treating this as finding the first
+      # opportunity during the time period
+      # where we can find that price
+      if current_price > best_price
+        best_price = current_price
+        best_buy_time = buy_time
+        best_sell_time = sell_time
+      end
+    end
+  end
 
-
+  { best_price: best_price, best_buy_time: best_buy_time, best_sell_time: best_sell_time }
 end
 
 def price_at(prices:, buy_time:, sell_time:)
   prices[sell_time] - prices[buy_time]
 end
 
+
+
+puts brute_force stock_prices_yesterday
+exit 1
 
 ###
 
@@ -94,3 +111,9 @@ end
 # new buy and sell lists are potentially very out-of-order compared to the
 # original price list, the time information will be used to ensure that
 # comparisons are only made if the buy price happened before the sell price.
+
+
+# When I'm done implementing the two algorithms, I'm gonna write a generator
+# and then a tester for the two, so that running test(10000) will generate
+# n prices and then Benchmark.bm the two algorithms, comparing that the output
+# is the same, and comparing the runtimes.
