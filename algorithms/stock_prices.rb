@@ -33,8 +33,14 @@ stock_prices_yesterday = [10, 7, 5, 8, 11, 9]
 # Instead, I'm keeping pointers so that comparisons
 # are only done for time frames that make sense
 def brute_force(stock_prices)
+  best_buy_time = nil
+  best_sell_time = nil
+
   buy_time = 0
   sell_time = 1
+  length = stock_prices.length
+
+  
 
 
 
@@ -59,3 +65,32 @@ end
 # I think there's probably a way to find some local optimziations (if this
 # were for HUGE data sets) where maybe we could only look at monotonically
 # increasing sections of the price graph
+#
+# The approach I'm taking is to make the problem easier by reducing the search
+# space. My logic is that since there's an ordering component to the
+# problem (the sell has to happen exclusively after the buy), there's an
+# optimization based on the ordering -- find the smallest number with the
+# largest number after it. Another way to say that is that we're interested
+# in comparing small ("buy") numbers to big ("sell") numbers.
+#
+# If there's a small number, it's worth comparing. If there's a bigger number
+# after it, it's not worth treating as a "buy" number. If there's a known
+# small "buy" number, the only prices that occur after it are ones that are
+# cheaper. Conversely, if there's a known "sell" number, any lower numbers
+# that come after it aren't worth considering -- only higher prices that
+# would be a better deal.
+#
+# So, my optimization is to do a single scan through the price list and build
+# two price lists -- buy prices and sell prices. To build the list of buy
+# prices, I'm going to include the first price in the list and then only
+# add numbers to that list that are smaller than the last (smallest) price found
+# so far. Also -- building the sell price list -- start with the first number
+# and then only add prices that are higher than it. Both of these lists will
+# include price and time information (the time information comes in handy
+# for the second phase).
+#
+# In the second phase, I will do the comparison, looking at buy-sell
+# opportunities. This is where the time information comes in -- since the
+# new buy and sell lists are potentially very out-of-order compared to the
+# original price list, the time information will be used to ensure that
+# comparisons are only made if the buy price happened before the sell price.
