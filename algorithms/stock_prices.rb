@@ -63,10 +63,7 @@ def price_at(prices:, buy_time:, sell_time:)
   prices[sell_time] - prices[buy_time]
 end
 
-
-
-puts brute_force stock_prices_yesterday
-exit 1
+brute_force stock_prices_yesterday
 
 ###
 
@@ -91,9 +88,10 @@ exit 1
 # in comparing small ("buy") numbers to big ("sell") numbers.
 #
 # If there's a small number, it's worth comparing. If there's a bigger number
-# after it, it's not worth treating as a "buy" number. If there's a known
-# small "buy" number, the only prices that occur after it are ones that are
-# cheaper. Conversely, if there's a known "sell" number, any lower numbers
+# after it, the second one is not worth treating as a "buy" number. If there's
+# a known small "buy" number, the only prices that are worth considering
+# occur after it and are cheaper.
+# Conversely, if there's a known "sell" number, any lower numbers
 # that come after it aren't worth considering -- only higher prices that
 # would be a better deal.
 #
@@ -112,6 +110,16 @@ exit 1
 # original price list, the time information will be used to ensure that
 # comparisons are only made if the buy price happened before the sell price.
 
+TimePrice = Struct.new(:time, :price)
+
+def optimized_reduce_search_space(stock_prices)
+  buy_prices = [] # store the low numbers
+  sell_prices = [] # store the high numbers
+
+  stock_prices.each_with_index do |price, time|
+
+  end
+end
 
 # When I'm done implementing the two algorithms, I'm gonna write a generator
 # and then a tester for the two, so that running test(10000) will generate
