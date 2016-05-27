@@ -10,8 +10,8 @@
 # accumulator and at the end it will contain the value that doesn't
 # have a match.
 
-# Obviously this has no error handling, no bounds checking,
-# and only works for positive integers. But, it's a cool technique.
+# Obviously there are some weird corner cases. If the odd-element is 0,
+# it's not going to return a distinguishable result.
 
 accumulator = 0
 
