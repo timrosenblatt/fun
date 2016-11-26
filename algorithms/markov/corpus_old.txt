@@ -1,0 +1,506 @@
+
+Futuristic Play by Andrew Chen
+Thoughts on viral marketing, user experience, game design, and online advertising
+
+Glitter obsession, both online and offline | Main | 5 ways to break past the San Francisco echo-chamber
+December 20, 2007
+Is your website a leaky bucket? 4 scenarios for user retention
+
+Do you have happy, smiling users?
+I've previously written a lot about metrics and user acquisition - just look at the left bar of this blog - but have not written much about metrics and user retention. By retention, I mean the process in which you convert new users who don't care about your site into recurring users that are loyal and continually drive pageviews.
+
+In general, I would say that more people care about this than pure user acquisition, which is great, but they are often using aggregate numbers to measure this retention. By aggregate data, I mean looking at an overall Google Analytics number, or looking at an Alexa rank, or some other rolled-up metric which doesn't differentiate between new users that are discovering your site for the first time versus loyal users that are returning to your site.
+
+In fact, in general I think of websites as "leaky buckets" where users are constantly getting poured into the top, and the site is constantly leaking users. In fact, you can imagine that if you pour 1,000 users into any website and then stop additional new users from joining, that 1,000 can only decrease. Over time, some users become loyal and throw off pageviews, but over time, they disappear. The rate at which this happens can be a turned into a metric just like any other number.
+
+Pop quiz: Is Twitter retaining users?
+First off, take a look at this graph and tell me if you think Twitter is retaining its userbase month over month. What do you think?
+
+Think you have any answer?
+
+The growth disambiguation problem
+And of course, it was a trick question. In fact, it's basically impossible from purely outside data to disambiguate the following scenarios:
+
+   1. Pageviews are coming ONLY from new users
+   2. Pageviews are coming ONLY from one generation of users (like early adopters)
+   3. Pageviews are coming ONLY from retained users
+   4. Pageviews are coming from new users and retained users
+
+This should be totally obvious to people, but instead I see people pointing at Alexa graphs and saying that site A or site B is doing well, when in fact they could have a deep systemic problem.
+
+In fact, let me argue the following in this post:
+
+    From aggregate data (like Alexa), you can figure out what sites are doing poorly at retention, but not what sites are doing well
+
+Let's start with the first scenario:
+
+1. Pageviews are coming ONLY from new users
+In this first scenario, the retention on your site totally sucks meaning that you lose all your people after the first session. That means that the drop off from a 1,000 users flowing in is 1,000 dropping to 0. Your retention rate is 0% from week 1 to week 2 :)
+
+That said, how could you still get pageviews? First off, you obviously get any pageviews a user might create in the first session, even if they never come back. I think the most common scenarios are the following:
+
+     Users create text content which is SEO'd and placed in the Google index
+     Users send invites via e-mail which are then accepted
+
+In either case, they are some form of "viral loop" that attracts new users even if the original user is never retained. In fact, I bet you that a lot of sites out there are buoyed by their search engine traffic, even when they have really terrible retention rates. All that matters is that they do enough work to generate a couple pageviews, and then bring in the next generation.
+
+Using the bucket analogy, this is a bucket that has a firehose filling it, but all the water leaks out almost immediately. With a big enough firehose, the aggregate stats could look good when they are in fact rather shitty.
+
+2. Pageviews are coming ONLY from one generation of users (like early adopters)
+3. Pageviews are coming ONLY from retained users
+Similar to the first scenario, you might have a situation where the numbers look great, but it's because the bucket was able to fill well in the first group of users, but after then, the site sucks at retention. Or the inverse, where there's no growth at all, but the retention is great.
+
+In either case, this might hint at a bad systematic condition within the site, but ultimately the aggregate numbers hide the problem. In either case, not being able to acquire and retain brand new users is a problem, and without measuring the groups separately, it seems impossible to assess the true situation.
+
+Back to Twitter for a second
+So in fact, looking at the Twitter chart, the right answer is "we don't know." A plateau'd chart like that could mean that Twitter is doing fine at retaining some set of users, and it's stalled on new users, or that it's acquiring news users like crazy but not retaining them, or anything in the middle.
+
+That said, given the fact that Twitter pages show up in Google, which will provide them with a steady stream of new users, and that the average time on site looks closer to a heavily SEO'd site like Yelp than a social site like MySpace (5min instead of 30min, according to Compete.com), I'd guess that they are actually bleeding users pretty rapidly. Again, it's hard to do an analysis like this without a lot more data to back it up, but that'd be my high-level analysis.
+
+How do you figure out the health of the site then? Measuring "cohorts"
+In general, the solution to the retention measurement problem lies in separating out NEW users and RETURNING users within the analytics. So at the minimum, you'd have to be able to talk about the following:
+
+     1 million uniques to the site
+     100,000 new uniques
+     900,000 returning uniques from the month before
+
+That'd give you a sense that the site was actually retaining users well. But to take this further, what you really care about is to carve up your userbase into "cohorts," and measure drop-off rates from time period to time period. Here's the definition of a time-based cohort:
+
+    A cohort is all the users that joined through a particular time period 
+
+Only then can you track the retention rate of a SPECIFIC set of users, and then measure other users experiencing an independent scenario. In the "cohort model" you'd end up with a group like:
+
+    Users that joined in Week 1
+    week 1 uniques: 100,000
+    week 2 uniques: 50,000
+    week 3 uniques: 25,000
+
+In this model, you'd see that 100k users joined in week 1, and if you follow that "cohort" through, you end up with a 50% drop-off rate from week to week.
+
+But then, in week 2, new users joined as well, which creates a week 2 cohort. Of course, in your aggregate metrics, the site would have 100k uniques in week 1, then 125k+50k uniques in week 2.
+
+    Users that joined in Week 2
+    week 2 uniques: 125,000
+    week 3 uniques: 50,000
+
+Note that this cohort only goes through 2 weeks because it starts at week 2 and ends at week 3, whereas the week 1 cohort is able to run 3 weeks.
+
+When you compare to the week 1 to week 2 cohort, you can tell that 1) there was a 25% increase in new users (100k to 125k), and that the retention rate DECREASED to 40% (50k/100k versus 50k/125k). This would be a red flag that your site was sucking, even if your aggregate stats looked good:
+
+    Total site stats
+    week 1 uniques: 100,000
+    week 2 uniques: 175,000
+    week 3 uniques: N/A
+    (since week3 cohort is not defined, 25k+50k+week3 cohort stats)
+
+It's not clear what your time period should be - perhaps weeks, perhaps days, perhaps months. Probably it depends on the average time between your users logging in, or something similar.
+
+Is there a retention coefficient?
+In fact, one might argue that in analyzing these cohorts that in addition to a "viral coefficient" which is measured in viral marketing, there's in fact a "retention coefficient" that measures how well you are able to keep ahold of users.
+
+This would be true if the cohorts you chose typically lose a constant % from week to week. That would mean that every cohort decays exponentially, which would give you a coefficient. (i.e., f(x) = e^-ax, where a is the retention coefficient)
+
+Please measure and e-mail me your findings ;-)
+
+Subscribe to this feed • Email this • Add to del.icio.us • Share on Facebook
+
+Posted at 11:22 PM | Permalink
+TrackBack
+
+TrackBack URL for this entry:
+http://www.typepad.com/t/trackback/1091203/24404822
+
+Listed below are links to weblogs that reference Is your website a leaky bucket? 4 scenarios for user retention:
+Comments
+
+Great article again Andrew. We're experiencing user retention problems with one of our gaming products. Granted most registration products have fairly high bounce rates, but of those who sign up, we're still experiencing some difficulty in getting users back. This article was helpful though.
+
+Posted by: Andrew Lee | December 21, 2007 at 06:21 AM
+
+Brilliant post. You are spot on about SEO. Also add domaining to that list. I just spoke with someone purchased 2,000 domains and increased Page Views 30% to his site off typos - no small feat as his site is a leader in his vertical.
+
+So as you imply and domaining amplifies, breaking down your scenarios by source can add an important level of understanding around retention metrics. It might also breed some good strategies as well.
+
+Posted by: Jonathan Mendez | December 21, 2007 at 07:27 AM
+
+Hey Andrew,
+
+nice post! As you state above, cohorting is the only way to really judge a site's success. To me it's also the only way to setup segmented marketing programs to figure out how to make money of these types of users. You might have a lot of 1-time visitors that are perfect for cross-selling to a survey company and another set of repeats that really use your product. Once you know, you can do things to optimize each segment's behavior. Many folks seem to be obsessed with their Alexa/Compete etc stats - but without getting access to the analytics data and setting up those segments, no way to tell how "sticky" a site really is.
+Another dimension to add to this besides pageview is what actions you want users to take once they're on your site. But that's yet another topic.
+
+Posted by: Christian Busch | December 22, 2007 at 04:16 AM
+
+terrific piece!
+
+your point that people often misinterpret stats on this subject is spot on (to the extent they're looking at any stats whatsoever), and cohort analysis is almost unheard of for understanding new user / customer lifecycle behavior.
+
+more like this ++
+
+:)
+
+Posted by: dave mcclure | December 23, 2007 at 03:12 PM
+
+Hi Andrew,
+
+I'm accustomed to thinking in terms of lifetime and lifetime value, and measuring that against cost per user acquisition, rather than a retention coefficient.
+
+Similar to what you outlined above, you look at new users on day 0 and then for all subsequent days look at how many returned. In all cases, it's a dramatically steep curve at first but then flattens out to form a long tail. And in all cases, you can arrive at a factor for user lifetime. For instance, on average you might find that in the first week you see 3 visits from each new user. Multiply 3 by your factor (let's say it's 6.5) and you can estimate your average user comes to your site 19.5 times before they are gone for good.
+
+If you somehow netted $.005 from each visit, then you're making about $.0975 per new user and can therefore spend up to that amount for each new user acquired.
+
+But with this data in hand (and there are ways you can look at this daily -- you're not necessarily 20-30 days behind in analysis), you can see how changes you make to your site affect your week1 and tail factors for average user lifetime.
+
+Posted by: Jordan Mitchell | January 06, 2008 at 10:08 AM
+
+Andrew.
+It's my first time on your site and already I've found many metrics to include on my website. thanks and I look forward to continue learning through your site.
+
+Posted by: Craig | May 26, 2008 at 11:25 AM
+Post a comment
+
+If you have a TypeKey or TypePad account, please Sign In
+
+You are currently signed in as (nobody). Sign Out
+
+Name:
+
+Email Address: (Not displayed with comment.)
+
+URL:
+
+Remember personal info?
+
+Comments:
+ABOUT THIS BLOG
+
+    
+      Futuristic Play
+
+      My name is Andrew Chen and I'm an entrepreneur living in San Francisco, CA. This blog covers my thoughts on metrics, viral marketing, user experience, game design, and online advertising.
+
+      I don't write often, so sometimes the easiest thing to do is to subscribe to my blog (which you can do below).
+
+Enter your email address:
+
+Delivered by FeedBurner
+Contact me
+
+    
+
+My Photo
+View Andrew Chen's profile on LinkedIn
+See how we're connected
+Subscribe in a reader
+Recommendations by Amazon
+
+    
+
+Popular Pages Today
+ 1.  	Futuristic Play by Andrew Chen: 25 reasons users STOP using your product: An analysis of customer lifecycle 23.33%
+ 2.  	Futuristic Play by Andrew Chen 19.00%
+ 3.  	Futuristic Play by Andrew Chen: Trying out the new Amazon Recommendations widget 15.85%
+ 4.  	Futuristic Play by Andrew Chen 14.07%
+ 5.  	Futuristic Play by Andrew Chen: MySpace versus Facebook: Analysis of both traffic and ad revenue, using Google Trends 7.97%
+ 6.  	Futuristic Play by Andrew Chen: Obama and McCain: How political marketing has evolved from offline to online 4.92%
+ 7.  	Futuristic Play by Andrew Chen: 10 obvious strategies to ruthlessly acquire users 4.04%
+ 8.  	Futuristic Play by Andrew Chen: 5 things that make your social network monetize like crap 3.84%
+ 9.  	Futuristic Play by Andrew Chen: Facebook viral marketing: When and why do apps "jump the shark?" 3.54%
+ 10.  	Futuristic Play by Andrew Chen: Is your website a leaky bucket? 4 scenarios for user retention 3.44%
+Click to get  FEEDJIT
+Live traffic feed
+  Orlando, Florida arrived on "Futuristic Play by Andrew Chen: Is your website a leaky bucket? 4 scenarios for user retention"
+  Palo Alto, California arrived on "Futuristic Play by Andrew Chen: 25 reasons users STOP using your product: An analysis of customer lifecycle"
+  London, London arrived from google.com on "Futuristic Play by Andrew Chen: Trying out the new Amazon Recommendations widget"
+  Seattle, Washington arrived from google.com on "Futuristic Play by Andrew Chen: Viral marketing is not a marketing strategy"
+  Miami, Florida arrived on "Futuristic Play by Andrew Chen: Trying out the new Amazon Recommendations widget"
+  Nuneaton, Warwickshire arrived from google.co.uk on "Futuristic Play by Andrew Chen: Public and private spaces, and why YouTube comments are so awful"
+  Seattle, Washington left "Futuristic Play by Andrew Chen: Trying out the new Amazon Recommendations widget" via radar.oreilly.com
+  Seattle, Washington arrived from google.com on "Futuristic Play by Andrew Chen: Trying out the new Amazon Recommendations widget"
+  Pinole, California arrived from google.com on "Futuristic Play by Andrew Chen: 5 factors that determine your advertising CPM rates"
+  São Paulo, Sao Paulo arrived on "Futuristic Play by Andrew Chen: MySpace versus Facebook: Analysis of both traffic and ad revenue, using Google Trends"
+Watch in Real-Time
+Options>> 
+Ignore my browser
+Live Traffic Map
+Popular Pages Today
+Click to get  FEEDJIT
+Looking for more about [term]?
+Popular Searches
+viral marketing facebook monetization cpm viral spreadsheet social network books cohort myspace game
+	
+Close
+
+Lijit Search
+ESSAYS ON VIRAL MARKETING, ONLINE ADS, AND GAMES
+
+     10 obvious strategies to ruthlessly acquire users
+     10 signs you're a product fanatic
+     10 tips for meeting people at industry events
+     5 factors that determine your advertising CPM rates
+     5 steps towards building a metrics-driven business
+     5 things that make your social network monetize like crap
+     5 ways to break past the San Francisco echo-chamber
+     Adwords is not enough for success on the consumer web
+     Are people like lab rats? Using reward schedules to drive engagement
+     Are you misusing Alexa numbers? (Probably)
+     Are your SEO efforts working, or failing?
+     Bridging your traffic engine with your revenue engine
+     Couple quotes on Facebook in Wired, Fortune, and NYT
+     Data portability: Is the social network data you're hoarding treasure or trash?
+     Do you ever say, "MySpace is sooo ugly?" This blog's for you...
+     Does Facebook reflect your true friendships? How about e-mail?
+     Facebook Apps: Why they're focused on fun instead of utility
+     Facebook viral marketing: When and why do apps "jump the shark?"
+     Game design tutorial at the GDC
+     How do you find a badass co-founder, Part 2
+     How do you find a badass co-founder?
+     How NOT to calculate ad revenue
+     Is blogging worth it? What's the ROI?
+     Is your site really viral? Viral Branding versus Viral Action
+     Is your website a leaky bucket? 4 scenarios for user retention
+     Lessons from the casino industry on engagement metrics and lifetime value
+     Moving to SF and joining the tech community - Lessons from my first year
+     MySpace versus Facebook: Analysis of both traffic and ad revenue, using Google Trends
+     Public and private spaces, and why YouTube comments are so awful
+     Social gaming design - Bartle types versus Web 2.0 participation pyramid
+     Social Gaming Summit: Recap and observations
+     Social network death spiral: How Metcalfe's Law can work against you
+     Social network marketing: Getting from zero to critical mass
+     Technology always changes, but people always stay the same
+     The design of social spaces
+     User retention: Why depending on notification-driven retention sucks
+     Users, customers, or audience - what do you call the people that visit your site?
+     Vertical ad networks: What are they, and why did Cox just buy Adify for $300MM?
+     Viral marketing is not a marketing strategy
+     What every Web 2.0 entrepreneur should know about virtual goods
+     What is your W2SAT score? (Web 2.0 Startup Aptitude Test)
+     What's an Entrepreneur-in-Residence?
+     What's broken about online dating?
+     What's broken with online travel?
+     What's the value of a user on your site? Why it's hard to calculate lifetime value for social network audiences
+     What's your viral loop? Understanding the engine of adoption
+     Why your friends list get polluted over time
+     Your ad-supported Web 2.0 site is actually a B2B enterprise in disguise
+     Your site will succeed or fail in the first 10 seconds
+
+Archives
+
+     July 2008
+     June 2008
+     May 2008
+     April 2008
+     March 2008
+     February 2008
+     January 2008
+     December 2007
+     November 2007
+     October 2007
+
+More...
+AdRoll
+
+    
+      AdRoll
+      Advertise on Futuristic Play by Andrew Chen
+
+Site Meter
+Google Analytics
+
+    
+
+
+
+Consumer genome testing companies Navigenics Inc. and 23andMe refused orders Tuesday by the state Health Department to cease accepting California clients until they satisfy officials that their businesses comply with regulations governing clinical laboratories.
+
+The two Bay Area companies, which are among 13 genetic testing outfits that were ordered to cease and desist this month by the state Department of Public Health, maintain that their operations already follow the law.
+
+Navigenics of Redwood City offers clients a $2,500 scan of their DNA for signs that they might be at higher risk for diseases such as cancer, diabetes and other ailments that may be preventable by improving health habits.
+
+"We invested a significant amount of time and energy up front for one and a half years before the launch (of the business in April) to understand the regulatory environment across the country and make sure we were in compliance," said Navigenics chief executive Mari Baker. "We were surprised to get the letter."
+
+Google-backed startup 23andMe, which offers a $999 DNA scan, also said it is not violating state regulations and would continue to do business in California.
+
+"However, we would like to have continued discussions with the department regarding the appropriate regulation of this unique industry," the company said.
+
+In the state letters posted online Tuesday, the Health Department warned the testing services they could face civil penalties or criminal prosecution if found in violation. The state gave each company a deadline to submit plans for complying with two general policies. Consumers cannot order genetic tests directly, the state said. Only a physician or surgeon can order such tests, in most cases. In addition, laboratories performing such tests must be state-licensed.
+
+Among the 13 firms warned was deCODEme Genetics of Iceland, another direct-to-consumer genome testing concern that competes with 23andMe and Navigenics.
+
+The three companies began selling the tests earlier this year and created a new model for consumer interaction with the flood of genetic information that followed the sequencing of the human genome and ensuing research on diseases linked to individual DNA patterns.
+
+Customers are invited to order the DNA scans online and send in their own samples of saliva by mail. The companies have varying styles of conveying the meaning of the tests to customers, including Web-based reports. They insist they are not practicing medicine, but providing an educational service.
+
+In addition, 23andMe adds an element of entertainment with a social-networking feature that allows clients to share DNA data with friends and family members.
+
+All of this is a far cry from the traditional pattern of genetic testing for specific inherited maladies such as cystic fibrosis or Huntington's disease. Such testing is usually initiated by a doctor, and is often accompanied by genetic counseling to help patients understand the implications of the tests and cope with their emotional reactions.
+
+The personal genome services stay away from diagnosing specific ailments, instead focusing on patterns of genetic variation that may indicate health risks such as heart disease, where diet, exercise and other factors are also important causes.
+
+Both New York and California, however, have insisted that the personal genome services must follow the same rules that apply to traditional medical testing.
+
+"The intent of California's clinical laboratory laws is to protect the public by ensuring that results are accurate and reliable," the state Public Health Department said in a statement issued Tuesday. "The physician assists the patient by ensuring that appropriate tests are ordered and interpreting the test results."
+
+Navigenics said it contracts with doctors to review online requests for the genome scans. The doctor, who does not know the client's name, orders the test from Navigenics' partner in the enterprise, Affymetrix Inc. of Santa Clara. Navigenics CEO Baker said Affymetrix, a leading genetic analysis company, holds all necessary state and federal licenses.
+
+The Health Department declined to comment on the defenses raised by individual companies. The department said it will review company responses and determine whether the laboratories are following the law. It has the power to seek injunctions against non-compliant companies or ask a district attorney to prosecute.
+
+In the meantime, Navigenics and other companies are meeting to draw up proposed regulations to govern genetic testing. Both Navigenics and 23andMe said they welcome further discussions with the state health department.
+
+"We respect the department's attention to this matter and believe that our interests are aligned with the department's in that we both want to ensure that personal genotyping services, like those of 23andMe, are accurate and reliable and that the health and safety of the general public is not compromised," the Mountain View company said.
+
+
+
+
+
+Help us develop a revolutionary website that allows people to read and understand more about their DNA.
+The developer will collaborate with our designers, scientists and writers to build the overall customer experience.
+
+* Collaborate with Product Managers to determine technical specifications for web application user interfaces
+* Implement user interfaces in DHTML/XHTML/CSS/Javascript/AJAX
+* Collaborate with designers to develop appropriate UI
+* Develop and maintain internal user interface frameworks and libraries
+
+Requirements
+
+* Bachelor's in Computer Science or higher
+* 2-4 years relevant work experience
+* DHTML/XHTML/CSS/Javascript/AJAX website implementation
+* Familiarity with Javascript/AJAX frameworks and libraries such as Prototype, Dojo
+* Framework/library design, implementation, and maintenance experience a plus
+* An interest in creating products that have 'real world' application
+
+Preferred Experience
+
+* Experience with server-side LAMP stack, including web programming in PHP, Python, or Perl and server-side AJAX
+* MySQL database experience also a plus
+
+
+
+Nigeria has overtaken Ireland as the second-largest market for Guinness as Diageo pushes the black stuff internationally.
+
+Although the world's biggest drinks company did not reveal precise numbers, it said net sales of Guinness in the year ending June 30 were up 18% in Nigeria.
+
+Strong growth across Africa helped to make up for a decline in Britain - the stout's biggest market - and Ireland. Guinness sales fell 7% in Ireland and the volume drunk fell by 9%. In Britain, sales fell 4% as consumption dropped 6%.
+
+Paul Walsh, chief executive, said: "Outside these two territories, Guinness is growing extremely well, and that is the future of the brand." He attributed the surge in sales in Africa to a new television advertising campaign that promotes the drink as "the home of greatness".
+
+Guinness sales in Ireland have been slipping for several years, leading to calls for Diageo to sell its beer business. The decline in sales in the UK and Ireland would probably have been even worse but for this summer's rain. Guinness drinkers often switch to lager in hot weather but, as Diageo pointed out, this has been less of a problem this year.
+
+The US is the fourth-largest consumer of Guinness, with Cameroon fifth.
+
+On the spirits side, sales of Johnnie Walker hit a record high. Diageo sold the equivalent of 15m nine-litre cases of the Scotch whisky in the last year, worth almost £1bn.
+
+Diageo, which was formed in 1997 by the merger of Guinness and Grand Metropolitan, also raised its guidance for organic growth for the current year to 9%. It recorded 8.7% organic growth in 2007.
+
+But to hit this target the company will have to cope with significant rises in the cost of raw materials, as commodity prices are up across the board. Consumers have recently been warned to expect price rises for meat, bread, milk and cheese - beer and whisky could be next.
+
+Nick Rose, Diageo's chief finance officer, said: "We are feeling inflationary pressure on commodities. This is going to be a huge task to grapple with in the coming year."
+
+Mr Rose said Diageo was seeing significant price rises for barley, corn, glass and aluminium. "There may be a net inflationary impact on the business," he warned.
+
+Diageo's pre-tax profits fell to £2.095bn, from £2.146bn in 2006, partly due to a fall in earnings from disposals. It plans to raise its dividend by 5% to 32.7p a share.
+
+Shares in Diageo closed up 24p at £10.42.
+
+Diageo has begun reviewing the future of the St James's Gate brewery in Dublin, which analysts say could be worth £2bn. But Mr Walsh said: "The value of the site is secondary to ensuring we have an efficient process in place."
+
+
+
+
+Once upon a time, the web was a straightforward affair. Lots of links - to lots and lots and lots of text. A decade on, it is virtually unrecognisable - a multimedia extravaganza where text has to compete with video, podcasts and animation.
+
+Peter Gabriel
+The former Genesis frontman has backed "The Filter" since 2005
+
+Enriching? Definitely. But daunting, and very, very noisy as well.
+
+So how do you tune out that noise and tune in to stuff you do want?
+
+Enter the concept of filtering - and enter alongside it, rock legend-turned-serial tech investor Peter Gabriel.
+
+"It's one thing to have access to unlimited information," he says.
+
+"But you feel like you're drowning sometimes - there's just too much stuff, and you really want the good stuff, the stuff that's going to excite and inspire you," he adds.
+
+Three years ago the former Genesis frontman gave his backing to an iTunes plug-in called "The Filter", which was designed to automatically generate playlists from your music collection.
+
+'Life-jockey'
+
+Now it has relaunched as a website with the more ambitious goal of being a "life jockey"; actually learning your taste in entertainment, and delivering appropriate content to you.
+
+The Filter
+The site uses artificial intelligence called Bayesian mathematics
+It takes a mathematical approach to work out the probability that you will like something based on your designated preferences.
+
+This analysis is then combined with other people's playlists and purchases to produce - fingers crossed - a list of media suited to your taste.
+
+"It's trying to say actually how do we make good choices - and that's partly through expert systems and algorithms," says Peter Gabriel.
+
+"It's also partly through people that we trust - friends, experts - so we're trying to integrate a system which takes the best of man and machine."
+
+Relationships
+
+This time round it is not just music that The Filter has in its sights. Web, video and even movies are all part of the taste-predicting experience.
+
+"We believe there maybe some real relationships worth exploring," he says.
+
+"A very obvious example would be if I love Goth films, I may also like Goth music. If I like obscure foreign language arthouse films, then I may tend to obscure music."
+
+But he accepts it is ambitious to make definite conclusions.
+
+"It's only as good as the usage the community gives it, so the bigger the database of information and references, the better the predictions.
+
+"Some maybe totally fanciful, but I think the more we look at it, the more it seems that there are connections you can make," he adds.
+
+And, he says, users will still be able to find the unpredictable "left-field" material for which the internet is famed.
+
+"On the site there's a bar which has got 'expected' and 'unexpected'. So, if you feel like an experimental day when you want all new stuff, unfamiliar things, you can select that," he says.
+
+"If you want more tried and tested, that's available too."
+
+Rivals
+
+The concept of recommendation sites is nothing new, as any visitor to Amazon will know.
+
+Last fm
+Founded in 2002, Last.fm says it now has more than 20m users
+And whilst The Filter has celebrity backing, other similar filtering sites have become stars in their own right.
+
+Start-up Last.fm was snapped up by CBS last year for a cool $280m (£143m) and iLike boasts 20 million users.
+
+Pandora employs an entirely unique approach, looking at musical attributes in songs you like - things like vocal harmony and orchestration - and then trying to find the same attributes in other music.
+
+Peter Gabriel accepts The Filter faces stiff competition from the other sites operating in this area.
+
+"For sure, we're behind," he admits. "We're a small English operation and we don't have some of the resources.
+
+"I think Last.fm did the social network side of the music thing very well and it's a well-designed, well-executed site.
+
+"I just think we're doing something a bit different, and filtering is coming in a big way. So I hope we can do it well, and we've certainly got some very smart people working on it."
+
+
+I finished Fareed Zakaria's The Post American World the other day. Which means the Zakaria quotes of the day are history. Hopefully you all enjoyed them. If you did, you should really pickup the book and read it.
+
+It's one of those books that doesn't really tell you anything you don't already know. It's the synthesis of all the information, the analysis, and the conclusions that are valuable.
+
+Here are my big take aways from the book:
+
+1) The next 10-20 years will witness the rise of much of the rest of the world, specifically China, India, Brazil, Russia and smaller but important developing countries like Turkey and South Africa. By 2025, China will be the second most important country in the world and India may well be third.
+
+2) Western and Eastern cultures will be combined in many ways. China will be westernized and modernized, but in its own Chinese way. Same with India and every other important eastern culture. And modernization is not westernization, although they are related developments.
+
+3) Many developing countries will not move immediately from totalitarian regimes to democracies, in fact most will move to a middle ground, much like what exists in China today. There are benefits to centrally planned economies. When China wants to knock down a town and build a city, it does it. There is a lot of power in China's model and many will emulate it given its success.
+
+4) Eventually, developing countries and the developed world will move to democracy, but it won't happen quickly and it won't always happen easily. This includes China.
+
+5) America is likely to remain the biggest economy and the most powerful country in the world for some time to come, but it will continue to lose power on a relative basis. And it will need to adopt new tactics and strategies to ensure it's economy and national security remain intact. It cannot continue to go it alone. That strategy, the Bush doctrine, has failed badly and given America's weakening hand, it should be put to rest for good.
+
+6) America is still supreme in three important, possibly the most important, areas; higher education, diversity and demographics, and creativity and ideas. These three pillars are interrelated and depend entirely on each other. Lose one and you'll eventually lose them all.
+
+That last point rings very true to me and probably to most readers of this blog. We are a nation of immigrants who value risk taking, capitalism, and innovation. We have developed the greatest higher education system in the world which attracts the best and brightest to our country. Our economic system keeps these best and brightest here in their most productive years bringing new ideas, products, services, companies, jobs, and wealth to our country. As Zakaria says, in what will be the last quote of the day;
+
+    Half of all Silicon Valley startups have one founder who is an immigrant or first-generation American. America's potential new burst of productivity, ... its ability to invent the future - all rest on immigration policies. 
+
+This photo got me to read this book. I hope every senator, congressman, staffer, and certainly anyone who wants to govern our country reads it.
+
+
