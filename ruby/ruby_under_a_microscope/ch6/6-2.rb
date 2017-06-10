@@ -41,5 +41,36 @@ class Bob < Person
   puts superclass
 
   # Even though ancestors is clearly being changed, something about the superclass
-  # search doesn't go through the modules.
+  # search doesn't count modules.
 end
+
+puts "\n\n"
+
+# Internally, when you include a module, Ruby creates a copy of the module structore
+# to put into the superclass inheritance chain
+
+class Alice
+  include Engineer
+end
+
+# This is false
+puts Alice.new.respond_to?(:write_code)
+
+module Engineer
+  def write_code
+  end
+end
+
+# This is true
+puts Alice.new.respond_to?(:write_code)
+
+# When Ruby makes a copy of the module class, it's method table pointer (m_tbl)
+# still points to the same method table in memory, which is why when we reopen
+# the method module and define a new method, Alice still gets it even though
+# technically the inheritance chain is pointing at a copy of the module's class.
+# They just have to make a copy of it because it's a node in a linked list and
+# they need to be able to change where the superclass pointers go. There's no
+# benefit in duplicating the method table each time.
+
+# Apparently "extend" works the same way as this, except instead of the class's
+# superclass linked list changing, the metaclass's superclass pointer is changed.
