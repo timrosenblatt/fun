@@ -4,6 +4,10 @@ require 'pp'
 # https://github.com/ko1/allocation_tracer
 # For watching how Ruby code performs.
 
+# Somewhat relatedly, here's a good discussion
+# on debugging Ruby memory leaks:
+# https://samsaffron.com/archive/2015/03/31/debugging-memory-leaks-in-ruby
+
 # The output from #trace is a hash where
 # the key is the file name and line number,
 # and the value is

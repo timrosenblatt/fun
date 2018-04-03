@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'allocation_tracer'
 gem 'cbor'
 gem 'msgpack'
 gem 'rspec-rails', '~> 2.0'
 gem 'rspec-its'
-
