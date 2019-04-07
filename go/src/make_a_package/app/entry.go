@@ -6,5 +6,6 @@ import (
 )
 
 func main() {
+	fmt.Println("version is " + version)
 	fmt.Println(greet.Morning)
 }
