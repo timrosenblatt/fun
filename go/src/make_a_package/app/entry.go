@@ -18,6 +18,14 @@ var (
 	c int = 1
 )
 
+func init() {
+	fmt.Println("first init")
+}
+
+func init() {
+	fmt.Println("second init. executed in declared order within a file, and lexical file name order within multiple files in a package")
+}
+
 func main() {
 	fmt.Println(a, b, c)
 
