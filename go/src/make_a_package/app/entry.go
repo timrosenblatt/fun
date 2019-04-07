@@ -18,10 +18,6 @@ var (
 	c int = 1
 )
 
-func f() int {
-	return c + 1
-}
-
 func main() {
 	fmt.Println(a, b, c)
 
