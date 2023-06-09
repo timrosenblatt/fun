@@ -31,6 +31,11 @@ helm install crossplane \
 # Consider switching out --wait for --timeout.... I don't actually need
 # the pods to be ready, I just need the CRD to get loaded
 
+
+#####
+# Set up the Azure Provider
+# https://docs.crossplane.io/latest/getting-started/provider-azure/
+
 cat <<EOF | kubectl apply -f -
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
@@ -53,3 +58,36 @@ else
   kubectl create secret generic azure-secret -n crossplane-system --from-file=creds=./azure-credentials.json
 fi
 
+cat <<EOF | kubectl apply -f -
+apiVersion: azure.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: azure-secret
+      key: creds
+EOF
+
+
+# Try it out and create a simple Resource Group
+
+cat <<EOF | kubectl apply -f -
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-rg
+spec:
+  forProvider:
+    location: "East US"
+  providerConfigRef:
+    name: default
+EOF
+
+
+# At this point in the demo, a real resource group has been created
+# and can be viewed at https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups
+# Make sure to clean it up with `k delete resourcegroup --all` or the teardown script
