@@ -43,6 +43,13 @@ EOF
 # Wow. Per `k get crds | wc -l` this installs 716 different CRDs, which makes
 # sense b/c it's installing a CRD per Azure service...but still...
 
-SUBSCRIPTION_ID=`az account subscription list | jq '.[] | select(.displayName == "Crossplane Testing")'.id`
-az ad sp create-for-rbac --sdk-auth --role Owner --scopes ${SUBSCRIPTION_ID} > azure-credentials.json
+
+if [[ ! -f azure-credentials.json ]]; then
+  echo "Azure credentials not found. Check README.md for preconditions"
+  exit
+else
+  echo "Azure credentials found, creating secret"
+
+  kubectl create secret generic azure-secret -n crossplane-system --from-file=creds=./azure-credentials.json
+fi
 
