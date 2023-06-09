@@ -1,13 +1,14 @@
 # Preconditions
 
-There needs to be an azure-credentials.json file
+Per https://marketplace.upbound.io/providers/upbound/provider-azure/v0.32.0/docs/configuration we need
+to create a secret with the credentials. The Azure provider uses the output from the az cli
+
+There needs to be an azure-credentials.json file. These are sensitive credentials, and should be .gitignored
 
 ```
 az account subscription list | jq '.[] | select(.displayName == "Crossplane Testing").id'
 az ad sp create-for-rbac --sdk-auth --role Owner --scopes ${SUBSCRIPTION_ID} > azure-credentials.json
 ```
-
-These are sensitive credentials, and should be .gitignored
 
 The credentials show up under "Enterprise applications"
 https://portal.azure.com/#view/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade/~/AppAppsPreview/menuId~/null
