@@ -91,3 +91,6 @@ EOF
 # At this point in the demo, a real resource group has been created
 # and can be viewed at https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups
 # Make sure to clean it up with `k delete resourcegroup --all` or the teardown script
+
+
+

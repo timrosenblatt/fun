@@ -15,7 +15,7 @@ echo "This still has to be implemented you monster https://docs.crossplane.io/la
 # I should probably be able to do `kubectl delete xrd --all` to get rid of resources
 # if i'm doing a full teardown.
 
-
+kubectl delete resourcegroup --all
 
 
 
