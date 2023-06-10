@@ -16,3 +16,5 @@ be sure to remove the filtering... the clientID from the credentials file will m
 the name column will be something like azure-cli-YYYY-MM-DD-HH-MM-SS
 
 
+# Trying it out
+Use the `setup.sh` and `teardown.sh` scripts.

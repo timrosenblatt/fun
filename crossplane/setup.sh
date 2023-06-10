@@ -75,22 +75,21 @@ EOF
 
 # Try it out and create a simple Resource Group
 
-cat <<EOF | kubectl apply -f -
-apiVersion: azure.upbound.io/v1beta1
-kind: ResourceGroup
-metadata:
-  name: example-rg
-spec:
-  forProvider:
-    location: "East US"
-  providerConfigRef:
-    name: default
-EOF
+# cat <<EOF | kubectl apply -f -
+# apiVersion: azure.upbound.io/v1beta1
+# kind: ResourceGroup
+# metadata:
+#   name: example-rg
+# spec:
+#   forProvider:
+#     location: "East US"
+#   providerConfigRef:
+#     name: default
+# EOF
 
 
 # At this point in the demo, a real resource group has been created
 # and can be viewed at https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups
 # Make sure to clean it up with `k delete resourcegroup --all` or the teardown script
-
 
 
