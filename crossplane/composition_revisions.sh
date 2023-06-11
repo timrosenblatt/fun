@@ -174,6 +174,29 @@ echo "In the output above, vpc-staging should have no REVISION, but the others s
 # from here the tutorial continues and it looks like we're going to make some changes to the Composition
 # and see what happens with the CompositionRevisions (XRs)
 
+kubectl label composition myvpcs.aws.example.upbound.io channel=staging --overwrite
 
+echo "See that there are 2 CompositionRevisions"
+# We updated the Composition, and the Composition controller must have noticed this and created a new Revision
+# So this seems like...we put a Composition in...Crossplane takes that Composition and creates a CompositionRevision..
+# Then when we create a CompositeResource...we create a Resource using a Revision, and the Revision is actually a specific
+# instance of the Composition..
+# So the Composition is the thing that explains "how to define a new resource kind", and then the revision gets created in case
+# we want to change the type of mapping...so using the canonical "set up a DB" example... if we created a CompanyDB CompositeResource for our users
+# and under the hood we use a Composition to transform that into a MySQL instance in Revision 1...we could later change the Composition and get
+# a new Revision of it, and the new Composition would take the CompanyDB CompositeResource and create a Postgres instnace in the new Revision 2
+# without impacting any old users of MySQL until they could update to the new revision.
+kubectl get compositionrevisions -o="custom-columns=NAME:.metadata.name, \
+  REVISION:.spec.revision, \
+  CHANNEL:.metadata.labels.channel"
 
-# TODO after this i think i'll understand enough to do https://docs.crossplane.io/latest/concepts/composition/ and test out a bunch of different transformations
+# Now that we see there are 2 CompositionRevisions, let's see which CompositionRevision is being used by each of the Composite resources
+echo "Look at the SHA at the end of the CR above and the Revision below...see how the 'auto' strategy already bumped the revision, and the staging now has a revision since the label now exists"
+kubectl get composite -o="custom-columns=NAME:.metadata.name, \
+  SYNCED:.status.conditions[0].status, \
+  REVISION:.spec.compositionRevisionRef.name, \
+  POLICY:.spec.compositionUpdatePolicy, \
+  MATCHLABEL:.spec.compositionRevisionSelector.matchLabels"
+
+# The rest of the tutorial is just doing another change and watching how it propagates, but this makes sense...
+# Moving on to https://docs.crossplane.io/latest/concepts/composition/ to learn about various transformation types
