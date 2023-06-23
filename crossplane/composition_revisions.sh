@@ -97,6 +97,8 @@ EOF
 
 echo "Default update policy"
 
+# ! I think this is a Claim. A Claim is like an instance of a Composition...it's like the following resource
+# literally means "I am making a claim on a MyVPC composite resource"
 cat <<EOF | kubectl apply -f -
 apiVersion: aws.example.upbound.io/v1alpha1
 kind: MyVPC
