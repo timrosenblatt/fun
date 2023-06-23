@@ -3,7 +3,7 @@
 # Implemented based on Dapr Cli https://github.com/dapr/cli/tree/master/install
 
 # VelaD location
-: ${VELAD_INSTALL_DIR:="/usr/local/bin"}
+: ${VELAD_INSTALL_DIR:="/usr/local/bin/"}
 
 # sudo is required to copy binary to VELAD_INSTALL_DIR for linux
 : ${USE_SUDO:="false"}
@@ -120,6 +120,7 @@ downloadFile() {
 }
 
 installFile() {
+    echo "starting installFile"
     tar xf "$ARTIFACT_TMP_FILE" -C "$VELAD_TMP_ROOT"
     local tmp_root_velad="$VELAD_TMP_ROOT/${OS}-${ARCH}/$VELAD_CLI_FILENAME"
 
@@ -129,13 +130,20 @@ installFile() {
     fi
 
     chmod o+x "$tmp_root_velad"
+
+
+echo "about to runasroot with params: $tmp_root_velad, $VELAD_INSTALL_DIR"
+
     runAsRoot mv "$tmp_root_velad" "$VELAD_INSTALL_DIR"
 
-    if [ $? -eq 0 ] && [ -f "$VELAD_CLI_FILE" ]; then
+echo "ran as root, about to test $VELAD_CLI_FILE but I wonder about $VELAD_CLI_FILENAME"
+
+    if  [ -f "$VELAD_CLI_FILE" ]; then
         echo "VelaD installed into $VELAD_INSTALL_DIR/$VELAD_CLI_FILENAME successfully."
         echo ""
         $VELAD_CLI_FILE version
     else
+        echo "OH NO IT IS FAIL"
         echo "Failed to install $VELAD_CLI_FILENAME"
         exit 1
     fi
