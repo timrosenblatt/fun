@@ -21,4 +21,7 @@ echo "The default username is 'admin' and the password is 'VelaUX12345'"
 
 # Just using the most basic way to access velaux, but for a more professional
 # installation they support using Services.
-vela port-forward addon-velaux -n vela-system 8000:8000
+# vela port-forward addon-velaux -n vela-system 8000:8000
+
+
+
