@@ -1,3 +1,3 @@
 #!/bin/bash
 
-velad uninstall
+kind delete cluster
