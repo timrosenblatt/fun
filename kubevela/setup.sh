@@ -5,7 +5,7 @@
 # put some echo statements in the installFile function, grab the binary off disk, and 
 # move it into /usr/local/bin/ by hand
 #
-# There seems to be another bug in the 
+# There seems to be another bug in the standalone installer...
 
 if command -v "velad" &>/dev/null; then
   echo "VelaD already installed..."
