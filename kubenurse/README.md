@@ -1,4 +1,19 @@
-https://kind.sigs.k8s.io/docs/user/ingress/
+# Notes
+I feel a bit misled. The description said it monitors all network connections....I was trying to figure out how it could do taht.
+
+> kubenurse is a little service that monitors all network connections in a Kubernetes cluster. Kubenurse measures request durations, records errors and exports those metrics in Prometheus format.
+
+This does not mean "all the TCP connections taking place within the cluster", but it literally means the network connections _between the nodes_. If pods in the cluster are talking to each other, that is not reflected in kubenurse data...
+
+I now realize the diagram under "health checks" is not a supplementary explanation, but that is actually the core functionality...each kubenurse pod is deployed as part of a daemonset, and it attempts to find all the others to say hi... this has the effect of checking network connectivity between nodes.
+
+
+# Setup instructions
+
+TODO need to change this to be a multinode cluster. The basic components are all running
+but the more nodes, the more the data will be meaningful. 
+
+?? I wonder what happens if I put a NetworkPolicy 
 
 ```
 cat <<EOF | kind create cluster --config=-
@@ -73,3 +88,4 @@ default creds are admin/admin
 
 Open https://raw.githubusercontent.com/postfinance/kubenurse/master/doc/grafana-kubenurse.json and paste it into  http://grafana.local/dashboard/import 
 
+TODO relaunch with clusters with more nodes
