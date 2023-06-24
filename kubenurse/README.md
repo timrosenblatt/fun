@@ -54,3 +54,22 @@ kubectl create -f prom_ingress.yaml
 ```
 
 be sure to add prometheus.local to /private/etc/hosts
+
+
+
+Then...grafana time
+https://devopscube.com/setup-grafana-kubernetes/
+
+```
+kubectl create -f grafana-datasource-config.yaml
+kubectl create -f grafana-deployment.yaml
+kubectl create -f grafana-service.yaml
+kubectl create -f grafana-ingress.yaml
+```
+
+Be sure to add grafana.local to /private/etc/hosts
+default creds are admin/admin
+
+
+Open https://raw.githubusercontent.com/postfinance/kubenurse/master/doc/grafana-kubenurse.json and paste it into  http://grafana.local/dashboard/import 
+
