@@ -40,6 +40,10 @@ def compile_model(model):
 
 compiled_model = compile_model(initial_model)
 
+####### up until this point, we're only creating the structure of the model, but we're
+# not doing anything with any acutal data...there's no references to the x and y training 
+
+
 def fit_model(model):
     """
     train the model and store the best weights
@@ -51,6 +55,7 @@ def fit_model(model):
         mode='max'
     )
 
+    # notice that this references the x and y _train_ variables...because we are training!
     model.fit(
         x_train,
         y_train,
@@ -65,6 +70,11 @@ print('\nTraining the model\n')
 trained_model = fit_model(compiled_model)
 
 
+# ?? I'm unclear on something.... this evaluate_model function loads the model off disk...
+# That makes a ton of sense, but above in fit_model it has that ModelCheckpoint is
+# set to "save best only", which should imply that every time i run the script,
+# it will result in the-same-or-better prediction rates...but I have seen the numbers go down
+# in the results shown in this function....
 def evaluate_model():
     best_model = load_model('models/mnist.hdf5')
     train_score = best_model.evaluate(x_train, y_train)

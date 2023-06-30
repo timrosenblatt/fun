@@ -71,6 +71,9 @@ def split_data():
     x_test, y_test = images[40000:].reshape(30000, 28, 28, 1), labels[40000:]
     return x_test, x_train, y_test, y_train
 
+# After having gone through the tutorial....these are some terrible variable names.. :D
+# I also am not super clear on why the original author does the double variable assignment above...
+# the x is really "image arrays" and the y is the labels for the data....
 x_test, x_train, y_test, y_train = split_data()
 
 ############
