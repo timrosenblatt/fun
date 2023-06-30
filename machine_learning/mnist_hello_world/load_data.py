@@ -1,5 +1,5 @@
 from os import getcwd
-from mnist import mnist
+from mnist import MNIST
 from numpy import array
 from tqdm import tqdm
 
