@@ -75,4 +75,9 @@ x_test, x_train, y_test, y_train = split_data()
 
 ############
 # OK now we have data...onto the neural network!
-
+# Normal "feed-forward" NNs use one dimensional arrays,
+# and there's something special about convolutional neural networks
+# where the convolution step ends up taking information as a multi-dimensional map about a single
+# bit and also the neighboring bits to produce a sort of...metabit, or a 
+# higher-order bit that represents information about a region in the space,
+# and creates a new multidimensional map storing all of that information
