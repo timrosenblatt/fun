@@ -78,6 +78,11 @@ trained_model = fit_model(compiled_model)
 def evaluate_model():
     best_model = load_model('models/mnist.hdf5')
     train_score = best_model.evaluate(x_train, y_train)
+
+    # So this is really how I'd use this... I orcehstrate the model, fit the model,
+    # and then call evaluate on it...and b/c these input vars are lists, I would just
+    # pass a list of 1...or I could just run it with whatever other test scenarios that
+    # i'd want it to have.
     test_score = best_model.evaluate(x_test, y_test)
     return train_score, test_score
 

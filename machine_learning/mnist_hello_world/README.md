@@ -22,3 +22,8 @@ and when done just type
 
 `deactivate`
 
+# Thoughts
+
+Cool tutorial. I added a bunch of inline notes... 
+
+I don't understand why the functionality for saving the best-fit model isn't working. On repeated runs, I see the models/mnist.hdf5 changing....but in theory it should only change if the results are better. But that's not happening, I sometimes get categorical_accuracy outputs that go up and sometimes they go down. Seems always to be somewhere 30-45%, and that's nowhere near the 98% shown in the tutorial sceenshot. I'd assume if it was correctly storing the models, I'd run this a ton of times and end up increasing towards a high success rate.
