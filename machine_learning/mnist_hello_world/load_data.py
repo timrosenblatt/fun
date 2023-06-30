@@ -35,5 +35,44 @@ images, labels = get_mnist_data()
 # The last one kinda seems to make the least sense... "avoiding ordinality" when a category var has
 # a natural ordering.... somehow some models get biased towards certain numbers, like 1 instead of 0?
 # Will have to learn more about that.
+def one_hot_encode(integer, array_length):
+    base = [0 for i in range(array_length)]
+    base[integer] = 1
+    return base
 
+print('\none-hot-encode output:\n')
+labels = array([one_hot_encode(label, 10) for label in tqdm(labels)])
+
+
+def normalize_and_reshape(image):
+    """
+    This converts all values between 0..1 and reshapes the array.
+    I guess the image comes in as a 1d array and this turns it into 
+    a 28x28 array
+    """
+    return array([float(i) / 255 for i in image]).reshape(28, 28)
+
+print('\nNormalize and reshape input images\n')
+images = array([normalize_and_reshape(image) for image in tqdm(images)])
+
+
+# Now it's time for something that I don't understand. The data set comes in 4 files..
+# 2 of them are called "train" and the other two are signified with "t10k" which doesn't
+# have an immediate google definition, but chatgpt says it basically means "10,000 test images"
+# so I guess NIST just pre-slices data for you to make it easier to have a training set, 
+# and then a physically separate test set which isn't included in the training set, so that 
+# the model can be tested on new samples.
+# But, this tutorial is re-slicing the data sets into 40k and 30k sizes
+def split_data():
+    """
+    Apply our own custom split of training and testing data. 
+    """
+    x_train, y_train = images[:40000].reshape(40000, 28, 28, 1), labels[:40000]
+    x_test, y_test = images[40000:].reshape(30000, 28, 28, 1), labels[40000:]
+    return x_test, x_train, y_test, y_train
+
+x_test, x_train, y_test, y_train = split_data()
+
+############
+# OK now we have data...onto the neural network!
 
