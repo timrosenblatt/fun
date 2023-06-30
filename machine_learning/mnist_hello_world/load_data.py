@@ -20,3 +20,20 @@ def get_mnist_data():
 
 images, labels = get_mnist_data()
 
+# So this is apparently called a "one-hot-encoding of the outputs".
+# https://www.geeksforgeeks.org/ml-one-hot-encoding-of-datasets-in-python/#
+# I guess it's just making a large array/bitmask of all possible states, 
+# and then only one of the bits is marked as one...it's like creating a ton of boolean
+# columns in a DB and using them as an enum, instead of having one single field with an int
+# mapped to each enum...and this is good b/c it lets you use numbers as values which
+# seem to be easier to work with...either certain tools or models?
+# also it somehow provides more information to the model about the "categorical variable"...
+# which I guess emerges b/c if you have one value that has 10 different options, some models
+# might not understand the cardinality/variety of possible values, but if each value is mapped as a certain
+# number of columns, the information about the number of possibilities is more "available" to the 
+# models?
+# The last one kinda seems to make the least sense... "avoiding ordinality" when a category var has
+# a natural ordering.... somehow some models get biased towards certain numbers, like 1 instead of 0?
+# Will have to learn more about that.
+
+
