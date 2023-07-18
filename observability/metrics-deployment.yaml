@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-metrics
+  labels:
+    app: sample-metrics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-metrics
+  template:
+    metadata:
+      labels:
+        app: sample-metrics
+    spec:
+      containers:
+      - name: sample-metrics-generator
+        image: sample-metrics-generator:latest
+        # imagePullPolicy is required b/c this is running a local docker image and
+        # also using kind, which imposes this requirement
+        # https://iximiuz.com/en/posts/kubernetes-kind-load-docker-image/
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080

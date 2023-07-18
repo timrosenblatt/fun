@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-metrics-service
+spec:
+  selector:
+    app: sample-metrics
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

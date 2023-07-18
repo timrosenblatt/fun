@@ -5,14 +5,29 @@ version: '3'
 tasks:
   default:
     cmds:
-      - echo "Run another command. Maybe 'task --list' :)"
+      - echo "Deploying the full stack"
+      - task: create_cluster
+      - task: make_binary
+      - task: make_dockerimage
+      - task: provision_dockerimage
+      - task: deploy_metrics_generator
     silent: true
+  
+  clean:
+    desc: Clean up the project
+    cmds: 
+      - task: teardown_cluster
+      - rm -f metrics-generator
 
   create_cluster:
     desc: Sets up the infra
     cmds:
       - kind create cluster --name observability --config=kind_cluster.yaml
       - kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+
+      # Annoying that a sleep is needed here but eventually it'll get fixed
+      # https://github.com/kubernetes/kubernetes/issues/83242
+      - sleep 20
       - >
         kubectl wait --namespace ingress-nginx \
           --for=condition=ready pod \
@@ -22,7 +37,7 @@ tasks:
       - kubectl create namespace monitoring
 
       # Install Prometheus
-      - kubectl create -f prom-cluster_role.yaml
+      - kubectl create -f prom-clusterrole.yaml
       - kubectl create -f prom-configmap.yaml
       - kubectl create -f prom-deployment.yaml
       - kubectl create -f prom-service.yaml
@@ -42,7 +57,28 @@ tasks:
   make_binary:
     desc: Builds the sample app
     cmds:
-
+      # Need to target linux OS since this is running in Rancher Desktop,
+      # but at least it is the same architecture
+      - GOOS=linux go build
+       
   make_dockerimage:
-    desc: Builds a docker image to deploy
+    desc: Builds the dockerfile
     cmds:
+      - docker build -t sample-metrics-generator:latest .
+  
+  run_dockerimage:
+    desc: Runs the docker image to test
+    cmds:
+      - docker run -p 8080:8080 sample-metrics-generator
+
+  provision_dockerimage:
+    desc: Provisions the docker image in kind
+    cmds:
+      - kind load docker-image --name observability sample-metrics-generator:latest
+
+  deploy_metrics_generator:
+    desc: Deploys the sample app to create metrics
+    cmds:
+      - kubectl create -f metrics-deployment.yaml
+      - kubectl create -f metrics-service.yaml
+      - kubectl create -f metrics-ingress.yaml
