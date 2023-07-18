@@ -8,7 +8,7 @@ Basically it creates a kind cluster, installs an ingress controller, Prometheus,
 
 Uses taskfile
 
-`task` to build. `task clean` to teardown.
+`task` to create the cluster + do the installs. `task clean` to teardown.
 
 Make sure that the `hosts` file has the following entries pointing to 127.0.0.1
 * app.local
