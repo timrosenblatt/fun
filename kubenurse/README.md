@@ -1,7 +1,7 @@
 https://github.com/postfinance/kubenurse/
 
 # Notes
-I feel a bit misled. The description said it monitors all network connections....I was trying to figure out how it could do taht.
+I feel a bit misled. The description said it monitors all network connections....I was trying to figure out how it could do that.
 
 > kubenurse is a little service that monitors all network connections in a Kubernetes cluster. Kubenurse measures request durations, records errors and exports those metrics in Prometheus format.
 
@@ -15,7 +15,7 @@ I now realize the diagram under "health checks" is not a supplementary explanati
 TODO need to change this to be a multinode cluster. The basic components are all running
 but the more nodes, the more the data will be meaningful. 
 
-?? I wonder what happens if I put a NetworkPolicy 
+?? I wonder what happens if I put a NetworkPolicy b/t pods or namespaces to cause failures. That should cause kubenurse to light up immediately.
 
 ```
 cat <<EOF | kind create cluster --config=-
