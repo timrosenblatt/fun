@@ -2,22 +2,47 @@
 
 version: '3'
 
-vars:
-  GREETING: Hello, World!
-
 tasks:
   default:
     cmds:
-      - echo "{{.GREETING}}"
+      - echo "Run another command. Maybe 'task --list' :)"
     silent: true
+
   create_cluster:
+    desc: Sets up the infra
     cmds:
-      - need to create the cluster
-      - need to install prometheus
-      - "? maybe install grafana?"
+      - kind create cluster --name observability --config=kind_cluster.yaml
+      - kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+      - >
+        kubectl wait --namespace ingress-nginx \
+          --for=condition=ready pod \
+          --selector=app.kubernetes.io/component=controller \
+          --timeout=90s
+
+      - kubectl create namespace monitoring
+
+      # Install Prometheus
+      - kubectl create -f prom-cluster_role.yaml
+      - kubectl create -f prom-configmap.yaml
+      - kubectl create -f prom-deployment.yaml
+      - kubectl create -f prom-service.yaml
+      - kubectl create -f prom-ingress.yaml
+
+      # Install Grafana
+      - kubectl create -f grafana-datasource-config.yaml
+      - kubectl create -f grafana-deployment.yaml
+      - kubectl create -f grafana-service.yaml
+      - kubectl create -f grafana-ingress.yaml
+
   teardown_cluster:
+    desc: Cleans up the toys
     cmds:
+      - kind delete cluster --name observability
+
   make_binary:
+    desc: Builds the sample app
     cmds:
+
   make_dockerimage:
+    desc: Builds a docker image to deploy
     cmds:
