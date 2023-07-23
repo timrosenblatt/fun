@@ -1,0 +1,9 @@
+commonLabels:
+  app: from-base-kustomization
+  source: from-base-kustomization-yaml
+resources:
+- deployment.yaml
+configMapGenerator:
+- name: a-configmap
+  files:
+  - env.startup.txt

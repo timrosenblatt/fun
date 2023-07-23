@@ -1,0 +1,21 @@
+namePrefix: prod-
+commonLabels:
+  variant: prod
+  app: replaced-by-production-commonlabels
+commonAnnotations:
+  note: Hello, I am production
+resources:
+- ../../base
+patches:
+- path: rename.yaml
+  target:
+    kind: Deployment
+patchesJson6902:
+- target:
+    version: v1
+    kind: Deployment
+    name: this-is-my-deployment
+  patch: |-
+    - op: replace
+      path: /metadata/labels/app
+      value: "overridden-by-6902"

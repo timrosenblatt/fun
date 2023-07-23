@@ -1,0 +1,12 @@
+namePrefix: development-
+commonLabels:
+  variant: dev
+  app: replaced-by-development-commonlabels
+commonAnnotations:
+  note: Developers developers developers
+resources:
+- ../../base
+patches:
+- path: rename.yaml
+  target:
+    kind: Deployment
