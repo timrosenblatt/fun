@@ -55,3 +55,5 @@ Interestingly, the JSON6902 patch happens _after_ the label transformer, which s
 As a simple test...I'm going to add a JSON6902 patch that will override the app label again, but it will be in the in the same kustomization.yaml as the definition of the other patch. So essentially what should happen is that the Deployment will be loaded off disk by base, transformed by the kustomization in there, then it will get the production kustomization applying the patch, then the commonLabel, and then finally it will be overridden by the PatchJson6902Transformer....
 
 ...it worked. running `kustomize build overlays/production` now shows the deployment gets an app label "overridden-by-6902" which is expected.
+
+to mess around later, `make && make kustomize` seems to be what's required to get a built binary in $GOBIN. `make nuke` will clean everything up.
