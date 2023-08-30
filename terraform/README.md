@@ -1,3 +1,5 @@
+Going through https://www.terraformupandrunning.com/
+
 `aws sso login` 
 `aws configure`
 `terraform plan`
