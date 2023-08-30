@@ -8,13 +8,8 @@ variable "server_port" {
     default = 8080
 }
 
-# # This makes it easy to do 
-# # curl http://$(tf output -raw public_ip):8080
-# output "public_ip" {
-#     value = aws_instance.example.public_ip
-#     description = "The public IP address for the server"
-# }
-
+# This makes it easy to do 
+# curl http://$(tf output -raw alb_dns_name)
 output "alb_dns_name" {
     value = aws_lb.example.dns_name
     description = "The domain name of the load balancer"
@@ -24,20 +19,19 @@ data "aws_vpc" "default" {
     default = true
 }
 
-data "aws_subnet_ids" "default" {
-    vpc_id = data.aws_vpc.default.id
+data "aws_subnets" "default" {
 }
 
 
 resource "aws_lb" "example" {
     name = "terraform-asg-example"
     load_balancer_type = "application"
-    subnets = data.aws_subnet_ids.default.ids
+    subnets = data.aws_subnets.default.ids
     security_groups = [aws_security_group.alb.id]
 }
 
 resource "aws_lb_listener" "http" {
-    load_balancer_arn = aws_lb.example.load_balancer_arn
+    load_balancer_arn = aws_lb.example.arn
     port = 80
     protocol = "HTTP"
 
@@ -122,7 +116,7 @@ resource "aws_launch_configuration" "example" {
 
 resource "aws_autoscaling_group" "example" {
     launch_configuration = aws_launch_configuration.example.name
-    vpc_zone_identifier = data.aws_subnet_ids.default.ids
+    vpc_zone_identifier = data.aws_subnets.default.ids
 
     target_group_arns = [aws_lb_target_group.asg.arn]
     health_check_type = "ELB"
